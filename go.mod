@@ -1,4 +1,4 @@
-module goempty
+module github.com/tangzixiang/goempty
 
 go 1.12
 
