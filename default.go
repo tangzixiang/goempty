@@ -8,16 +8,12 @@ type Def interface {
 // 如果 old 实现了 `Def` 则会返回 Default 方法的返回值
 func Default(old interface{}, defaultV ...interface{}) interface{} {
 
-	if old == nil {
-		return nil
+	if IsZero(old) && len(defaultV) >0 {
+		return defaultV[0]
 	}
 
 	if d, ok := old.(Def); ok {
 		return d.Default()
-	}
-
-	if IsZero(old) && len(defaultV) >0 {
-		return defaultV[0]
 	}
 
 	return nil

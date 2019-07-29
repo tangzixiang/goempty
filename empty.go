@@ -12,7 +12,7 @@ type Emp interface {
 // 如果 value 实现了 `Emp` 则会返回 Empty 方法的返回值
 func IsZero(value interface{}) bool {
 	if value == nil {
-		return false
+		return true
 	}
 
 	if emptier, ok := value.(Emp); ok {
@@ -44,6 +44,11 @@ func IsZero(value interface{}) bool {
 		return IsFloat64Empty(v)
 	case bool:
 		return v == false
+	}
+	
+	kind := reflect.TypeOf(value).Kind()
+	if kind == reflect.Map || kind == reflect.Func || kind == reflect.Ptr || kind == reflect.Chan{
+		return false
 	}
 
 	return reflect.Zero(reflect.TypeOf(value)).Interface() == value
