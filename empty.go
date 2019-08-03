@@ -47,7 +47,12 @@ func IsZero(value interface{}) bool {
 	}
 	
 	kind := reflect.TypeOf(value).Kind()
-	if kind == reflect.Map || kind == reflect.Func || kind == reflect.Ptr || kind == reflect.Chan{
+	if kind == reflect.Map || kind == reflect.Func || kind == reflect.Chan || kind == reflect.Ptr  || kind == reflect.Slice{
+		v := reflect.ValueOf(value)
+		if v.IsNil()|| v.IsValid(){
+			return true
+		}
+
 		return false
 	}
 

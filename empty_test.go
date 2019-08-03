@@ -60,4 +60,8 @@ func TestIsZero(t *testing.T) {
 	if !assert.True(t, IsZero(MyName{""})) {
 		return
 	}
+
+	if !assert.True(t, IsZero((*uint64)(nil))) {
+		return
+	}
 }
